@@ -1,7 +1,7 @@
 package simulation;
 
 import daytime.Daytime;
-import daytime.DaytimeManager;
+import daytime.DaytimeSimulator;
 import daytime.DaytimeUtility;
 import daytime.Weekday;
 
@@ -21,7 +21,7 @@ public class Simulator {
     private SimulatorView simulatorView;
     private Daytime startDayTime;
     private Daytime endDayTime;
-    private DaytimeManager daytimeManager;
+    private DaytimeSimulator daytimeSimulator;
     private int tickPause = 100;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
@@ -45,7 +45,7 @@ public class Simulator {
         this.startDayTime = new Daytime();
         this.endDayTime = new Daytime();
         this.endDayTime.hours = 1;
-        this.daytimeManager = new DaytimeManager(this.startDayTime);
+        this.daytimeSimulator = new DaytimeSimulator(this.startDayTime);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Simulator {
      */
     public void run() {
         while (true) {
-            if (daytimeManager.getDaytime().equals(endDayTime)) {
+            if (daytimeSimulator.getDaytime().equals(endDayTime)) {
                 break;
             }
 
@@ -67,7 +67,7 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void tick() {
-        this.daytimeManager.tick();
+        this.daytimeSimulator.tick();
         this.handleExit();
         this.updateViews();
 
@@ -206,7 +206,7 @@ public class Simulator {
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        Daytime daytime = this.daytimeManager.getDaytime();
+        Daytime daytime = this.daytimeSimulator.getDaytime();
 
         int averageNumberOfCarsPerHour = 0;
 

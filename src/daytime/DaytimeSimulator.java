@@ -1,9 +1,9 @@
 package daytime;
 
-public class DaytimeManager {
+public class DaytimeSimulator {
     private Daytime daytime;
 
-    public DaytimeManager(Daytime daytime) {
+    public DaytimeSimulator(Daytime daytime) {
         this.daytime = daytime;
     }
 
