@@ -200,7 +200,7 @@ public class Simulator {
     	int i = 0;
 
     	while (this.exitCarQueue.carsInQueue() > 0 && i < this.exitSpeed) {
-            this.exitCarQueue.removeCar()
+            this.exitCarQueue.removeCar();
             ++i;
     	}	
     }
