@@ -27,7 +27,7 @@ public class Location {
         if (obj instanceof Location) {
             Location other = (Location)obj;
 
-            if (floor == other.getFloor() && row == other.getRow() && place == other.getPlace()) {
+            if (this.floor == other.getFloor() && this.row == other.getRow() && this.place == other.getPlace()) {
                 return true;
             } else {
                 return false;
@@ -43,7 +43,7 @@ public class Location {
      * @return A string representation of the location.
      */
     public String toString() {
-        return floor + "," + row + "," + place;
+        return this.floor + "," + this.row + "," + this.place;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Location {
      * @return A hashcode for the location.
      */
     public int hashCode() {
-        return (floor << 20) + (row << 10) + place;
+        return (this.floor << 20) + (this.row << 10) + this.place;
     }
 
     /**
@@ -63,7 +63,7 @@ public class Location {
      * @return The floor.
      */
     public int getFloor() {
-        return floor;
+        return this.floor;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Location {
      * @return The row.
      */
     public int getRow() {
-        return row;
+        return this.row;
     }
 
     /**
@@ -81,6 +81,6 @@ public class Location {
      * @return The place.
      */
     public int getPlace() {
-        return place;
+        return this.place;
     }
 }
