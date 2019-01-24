@@ -288,7 +288,7 @@ public class SimulatorView extends JFrame {
                     for(int place = 0; place < getNumberOfPlaces(); ++place) {
                         Location location = new Location(floor, row, place);
                         Car car = getCarAt(location);
-                        Color color =  Color.white
+                        Color color =  Color.white;
 
                         if (car != null) {
                             car.getColor();
