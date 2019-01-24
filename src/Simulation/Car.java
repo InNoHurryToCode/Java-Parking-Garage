@@ -97,7 +97,7 @@ public abstract class Car {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void tick() {
-        minutesLeft--;
+        --minutesLeft;
     }
 
     /**
