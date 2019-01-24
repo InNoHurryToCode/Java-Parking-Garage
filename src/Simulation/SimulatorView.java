@@ -3,6 +3,10 @@ package Simulation;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * SimulatorView contains all the view logic and partial simulation logic
+ * @author Hanzehogeschool of Applied Sciences
+ */
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
     private int numberOfFloors;
@@ -11,6 +15,13 @@ public class SimulatorView extends JFrame {
     private int numberOfOpenSpots;
     private Car[][][] cars;
 
+    /**
+     * Simulator view constructor
+     * @author Hanzehogeschool of Applied Sciences
+     * @param numberOfFloors the amount of floors to draw
+     * @param numberOfRows the amount of rows to draw
+     * @param numberOfPlaces the amount of places to draw
+     */
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
@@ -28,26 +39,56 @@ public class SimulatorView extends JFrame {
         updateView();
     }
 
+    /**
+     * Update the view
+     * @author Hanzehogeschool of Applied Sciences
+     */
     public void updateView() {
         carParkView.updateView();
     }
-    
+
+    /**
+     * Get the amount of floors
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the amount of floors
+     */
 	public int getNumberOfFloors() {
         return numberOfFloors;
     }
 
+    /**
+     * Get the amount of rows
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the amount of rows
+     */
     public int getNumberOfRows() {
         return numberOfRows;
     }
 
+    /**
+     * Get the amount of places
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the amount of places
+     */
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
 
+    /**
+     * Get the amount of open spots
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the amount of open spots
+     */
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
     }
-    
+
+    /**
+     * Get the car from a specific location
+     * @author Hanzehogeschool of Applied Sciences
+     * @param location the car location
+     * @return the car on the location
+     */
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -55,6 +96,13 @@ public class SimulatorView extends JFrame {
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
+    /**
+     * Set the car to a specific location
+     * @author Hanzehogeschool of Applied Sciences
+     * @param location the car location
+     * @param car the car to assign to the location
+     * @return whenever the car is set to the position
+     */
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -69,6 +117,12 @@ public class SimulatorView extends JFrame {
         return false;
     }
 
+    /**
+     * Remove the car from a specific location
+     * @author Hanzehogeschool of Applied Sciences
+     * @param location the car location
+     * @return the removed car
+     */
     public Car removeCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -83,6 +137,11 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
+    /**
+     * Get the first available location
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the first available location
+     */
     public Location getFirstFreeLocation() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -97,6 +156,11 @@ public class SimulatorView extends JFrame {
         return null;
     }
 
+    /**
+     * Get the first car that's about to leave
+     * @author Hanzehogeschool of Applied Sciences
+     * @return the first leaving car
+     */
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -112,6 +176,10 @@ public class SimulatorView extends JFrame {
         return null;
     }
 
+    /**
+     * Update the simulation
+     * @author Hanzehogeschool of Applied Sciences
+     */
     public void tick() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -126,6 +194,12 @@ public class SimulatorView extends JFrame {
         }
     }
 
+    /**
+     * Check if the location is valid
+     * @author Hanzehogeschool of Applied Sciences
+     * @param location the location to check
+     * @return if the location is valid
+     */
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
@@ -135,7 +209,11 @@ public class SimulatorView extends JFrame {
         }
         return true;
     }
-    
+
+    /**
+     * CaParkView contains the view logic
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private class CarParkView extends JPanel {
         
         private Dimension size;
@@ -143,6 +221,7 @@ public class SimulatorView extends JFrame {
     
         /**
          * Constructor for objects of class CarPark
+         * @author Hanzehogeschool of Applied Sciences
          */
         public CarParkView() {
             size = new Dimension(0, 0);
@@ -150,6 +229,7 @@ public class SimulatorView extends JFrame {
     
         /**
          * Overridden. Tell the GUI manager how big we would like to be.
+         * @author Hanzehogeschool of Applied Sciences
          */
         public Dimension getPreferredSize() {
             return new Dimension(800, 500);
@@ -158,6 +238,7 @@ public class SimulatorView extends JFrame {
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
          * internal image to screen.
+         * @author Hanzehogeschool of Applied Sciences
          */
         public void paintComponent(Graphics g) {
             if (carParkImage == null) {
@@ -173,7 +254,11 @@ public class SimulatorView extends JFrame {
                 g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
-    
+
+        /**
+         * Update the JPanel
+         * @author Hanzehogeschool of Applied Sciences
+         */
         public void updateView() {
             // Create a new car park image if the size has changed.
             if (!size.equals(getSize())) {
@@ -196,6 +281,7 @@ public class SimulatorView extends JFrame {
     
         /**
          * Paint a place on this car park view in a given color.
+         * @author Hanzehogeschool of Applied Sciences
          */
         private void drawPlace(Graphics graphics, Location location, Color color) {
             graphics.setColor(color);
