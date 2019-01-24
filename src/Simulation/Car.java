@@ -26,7 +26,7 @@ public abstract class Car {
      * @return the car's location
      */
     public Location getLocation() {
-        return location;
+        return this.location;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class Car {
      * @return the amount of minutes left
      */
     public int getMinutesLeft() {
-        return minutesLeft;
+        return this.minutesLeft;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class Car {
      * @return if the car is paying
      */
     public boolean getIsPaying() {
-        return isPaying;
+        return this.isPaying;
     }
 
     /**
@@ -80,7 +80,7 @@ public abstract class Car {
      * @return
      */
     public boolean getHasToPay() {
-        return hasToPay;
+        return this.hasToPay;
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class Car {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void tick() {
-        --minutesLeft;
+        --this.minutesLeft;
     }
 
     /**
