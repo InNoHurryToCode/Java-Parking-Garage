@@ -1,5 +1,10 @@
 package simulation;
 
+import daytime.Daytime;
+import daytime.DaytimeSimulator;
+import daytime.DaytimeUtility;
+import daytime.Weekday;
+
 import java.util.Random;
 
 /**
@@ -14,9 +19,9 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
-    private int day = 0;
-    private int hour = 0;
-    private int minute = 0;
+    private Daytime startDayTime;
+    private Daytime endDayTime;
+    private DaytimeSimulator daytimeSimulator;
     private int tickPause = 100;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
@@ -37,6 +42,10 @@ public class Simulator {
         this.paymentCarQueue = new CarQueue();
         this.exitCarQueue = new CarQueue();
         this.simulatorView = new SimulatorView(3, 6, 30);
+        this.startDayTime = new Daytime();
+        this.endDayTime = new Daytime();
+        this.endDayTime.hours = 1;
+        this.daytimeSimulator = new DaytimeSimulator(this.startDayTime);
     }
 
     /**
@@ -44,7 +53,11 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void run() {
-        for (int i = 0; i < 10000; ++i) {
+        while (true) {
+            if (daytimeSimulator.getDaytime().equals(endDayTime)) {
+                break;
+            }
+
             this.tick();
         }
     }
@@ -54,7 +67,7 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void tick() {
-        this.advanceTime();
+        this.daytimeSimulator.tick();
         this.handleExit();
         this.updateViews();
 
@@ -66,29 +79,6 @@ public class Simulator {
         }
 
         this.handleEntrance();
-    }
-
-    /**
-     * Update the simulated time
-     * @author Hanzehogeschool of Applied Sciences
-     */
-    private void advanceTime() {
-        // Advance the time by one minute.
-        ++this.minute;
-
-        while (this.minute > 59) {
-            this.minute -= 60;
-            ++this.hour;
-        }
-
-        while (this.hour > 23) {
-            this.hour -= 24;
-            ++this.day;
-        }
-
-        while (this.day > 6) {
-            this.day -= 7;
-        }
     }
 
     /**
@@ -200,7 +190,7 @@ public class Simulator {
     	int i = 0;
 
     	while (this.exitCarQueue.carsInQueue() > 0 && i < this.exitSpeed) {
-            this.exitCarQueue.removeCar()
+            this.exitCarQueue.removeCar();
             ++i;
     	}	
     }
@@ -216,7 +206,15 @@ public class Simulator {
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
+        Daytime daytime = this.daytimeSimulator.getDaytime();
+
+        int averageNumberOfCarsPerHour = 0;
+
+        if ((DaytimeUtility.getWeekday(daytime) == Weekday.SATURDAY) || (DaytimeUtility.getWeekday(daytime) == Weekday.SUNDAY)) {
+            averageNumberOfCarsPerHour = weekend;
+        } else {
+            averageNumberOfCarsPerHour = weekDay;
+        }
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
