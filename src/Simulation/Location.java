@@ -1,5 +1,9 @@
 package Simulation;
 
+/**
+ * Location contains the car spot properties
+ * @author Hanzehogeschool of Applied Sciences
+ */
 public class Location {
 
     private int floor;
@@ -8,6 +12,7 @@ public class Location {
 
     /**
      * Constructor for objects of class Location
+     * @author Hanzehogeschool of Applied Sciences
      */
     public Location(int floor, int row, int place) {
         this.floor = floor;
@@ -17,6 +22,7 @@ public class Location {
 
     /**
      * Implement content equality.
+     * @author Hanzehogeschool of Applied Sciences
      */
     public boolean equals(Object obj) {
         if(obj instanceof Location) {
@@ -30,6 +36,7 @@ public class Location {
 
     /**
      * Return a string of the form floor,row,place.
+     * @author Hanzehogeschool of Applied Sciences
      * @return A string representation of the location.
      */
     public String toString() {
@@ -40,6 +47,7 @@ public class Location {
      * Use the 10 bits for each of the floor, row and place
      * values. Except for very big car parks, this should give
      * a unique hash code for each (floor, row, place) tupel.
+     * @author Hanzehogeschool of Applied Sciences
      * @return A hashcode for the location.
      */
     public int hashCode() {
@@ -47,6 +55,8 @@ public class Location {
     }
 
     /**
+     * Get the floor
+     * @author Hanzehogeschool of Applied Sciences
      * @return The floor.
      */
     public int getFloor() {
@@ -54,6 +64,8 @@ public class Location {
     }
 
     /**
+     * Get the row
+     * @author Hanzehogeschool of Applied Sciences
      * @return The row.
      */
     public int getRow() {
@@ -61,6 +73,8 @@ public class Location {
     }
 
     /**
+     * Get the place
+     * @author Hanzehogeschool of Applied Sciences
      * @return The place.
      */
     public int getPlace() {

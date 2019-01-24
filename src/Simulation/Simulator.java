@@ -2,6 +2,10 @@ package Simulation;
 
 import java.util.Random;
 
+/**
+ * Simulator contains most of the simulation logic
+ * @author Hanzehogeschool of Applied Sciences
+ */
 public class Simulator {
 
 	private static final String AD_HOC = "1";
@@ -29,6 +33,10 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
 
+    /**
+     * The Simulator constructor
+     * @author Hanzehogeschool of Applied Sciences
+     */
     public Simulator() {
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
@@ -37,12 +45,20 @@ public class Simulator {
         simulatorView = new SimulatorView(3, 6, 30);
     }
 
+    /**
+     * Initiate the simulation
+     * @author Hanzehogeschool of Applied Sciences
+     */
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
         }
     }
 
+    /**
+     * Update the simulation
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void tick() {
     	advanceTime();
     	handleExit();
@@ -56,6 +72,10 @@ public class Simulator {
     	handleEntrance();
     }
 
+    /**
+     * Update the simulated time
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
@@ -73,24 +93,40 @@ public class Simulator {
 
     }
 
+    /**
+     * Update entrance queues
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
     	carsEntering(entranceCarQueue);  	
     }
-    
+
+    /**
+     * Update exit queues
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
-    
+
+    /**
+     * Update SimultorView
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
         simulatorView.updateView();	
     }
-    
+
+    /**
+     * Update arriving cars
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
@@ -98,6 +134,11 @@ public class Simulator {
         addArrivingCars(numberOfCars, PASS);    	
     }
 
+    /**
+     * Update entering cars
+     * @author Hanzehogeschool of Applied Sciences
+     * @param queue
+     */
     private void carsEntering(CarQueue queue){
         int i=0;
         // Remove car from the front of the queue and assign to a parking space.
@@ -110,7 +151,11 @@ public class Simulator {
             i++;
         }
     }
-    
+
+    /**
+     * Update cars ready to leave
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = simulatorView.getFirstLeavingCar();
@@ -126,6 +171,10 @@ public class Simulator {
         }
     }
 
+    /**
+     * Update paying cars
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void carsPaying(){
         // Let cars pay.
     	int i=0;
@@ -136,7 +185,11 @@ public class Simulator {
             i++;
     	}
     }
-    
+
+    /**
+     * Update leaving cars
+     * @author Hanzehogeschool of Applied Sciences
+     */
     private void carsLeaving(){
         // Let cars leave.
     	int i=0;
@@ -145,7 +198,14 @@ public class Simulator {
             i++;
     	}	
     }
-    
+
+    /**
+     * Get number of cars
+     * @author Hanzehogeschool of Applied Sciences
+     * @param weekDay the number of weekday cars
+     * @param weekend the number of weekend cars
+     * @return random number of cars based on gaussian
+     */
     private int getNumberOfCars(int weekDay, int weekend){
         Random random = new Random();
 
@@ -159,7 +219,13 @@ public class Simulator {
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         return (int)Math.round(numberOfCarsPerHour / 60);	
     }
-    
+
+    /**
+     * Add arriving cars
+     * @author Hanzehogeschool of Applied Sciences
+     * @param numberOfCars the amount of cars
+     * @param type the car type
+     */
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
     	switch(type) {
@@ -175,7 +241,12 @@ public class Simulator {
             break;	            
     	}
     }
-    
+
+    /**
+     * Make the car leave their spot
+     * @author Hanzehogeschool of Applied Sciences
+     * @param car the car to leave it's spot
+     */
     private void carLeavesSpot(Car car){
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
