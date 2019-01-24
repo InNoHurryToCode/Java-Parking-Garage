@@ -3,8 +3,8 @@ package daytime;
 public class DaytimeManager {
     private Daytime daytime;
 
-    public DaytimeManager() {
-        this.daytime = new Daytime();
+    public DaytimeManager(Daytime daytime) {
+        this.daytime = daytime;
     }
 
     public void tick() {

@@ -45,7 +45,7 @@ public class Simulator {
         this.startDayTime = new Daytime();
         this.endDayTime = new Daytime();
         this.endDayTime.hours = 1;
-        this.daytimeManager = new DaytimeManager();
+        this.daytimeManager = new DaytimeManager(this.startDayTime);
     }
 
     /**
