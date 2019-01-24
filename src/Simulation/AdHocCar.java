@@ -16,8 +16,9 @@ public class AdHocCar extends Car {
      */
     public AdHocCar() {
     	Random random = new Random();
-    	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
-        this.setMinutesLeft(stayMinutes);
+    	int stayMinutes = (int)(15 + random.nextFloat() * 3 * 60);
+
+    	this.setMinutesLeft(stayMinutes);
         this.setHasToPay(true);
     }
 
@@ -26,7 +27,7 @@ public class AdHocCar extends Car {
      * @author Hanzehogeschool of Applied Sciences
      * @return the color
      */
-    public Color getColor(){
-    	return COLOR;
+    public Color getColor() {
+        return COLOR;
     }
 }
