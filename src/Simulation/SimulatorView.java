@@ -32,10 +32,10 @@ public class SimulatorView extends JFrame {
 
         Container contentPane = getContentPane();
 
-        contentPane.add(carParkView, BorderLayout.CENTER);
+        contentPane.add(this.carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
-        updateView();
+        this.updateView();
     }
 
     /**
@@ -43,7 +43,7 @@ public class SimulatorView extends JFrame {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void updateView() {
-        carParkView.updateView();
+        this.carParkView.updateView();
     }
 
     /**
@@ -52,7 +52,7 @@ public class SimulatorView extends JFrame {
      * @return the amount of floors
      */
 	public int getNumberOfFloors() {
-	    return numberOfFloors;
+	    return this.numberOfFloors;
     }
 
     /**
@@ -61,7 +61,7 @@ public class SimulatorView extends JFrame {
      * @return the amount of rows
      */
     public int getNumberOfRows() {
-        return numberOfRows;
+        return this.numberOfRows;
     }
 
     /**
@@ -70,7 +70,7 @@ public class SimulatorView extends JFrame {
      * @return the amount of places
      */
     public int getNumberOfPlaces() {
-        return numberOfPlaces;
+        return this.numberOfPlaces;
     }
 
     /**
@@ -79,7 +79,7 @@ public class SimulatorView extends JFrame {
      * @return the amount of open spots
      */
     public int getNumberOfOpenSpots(){
-        return numberOfOpenSpots;
+        return this.numberOfOpenSpots;
     }
 
     /**
@@ -89,11 +89,11 @@ public class SimulatorView extends JFrame {
      * @return the car on the location
      */
     public Car getCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (!this.locationIsValid(location)) {
             return null;
         }
 
-        return cars[location.getFloor()][location.getRow()][location.getPlace()];
+        return this.cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
 
     /**
@@ -104,16 +104,16 @@ public class SimulatorView extends JFrame {
      * @return whenever the car is set to the position
      */
     public boolean setCarAt(Location location, Car car) {
-        if (!locationIsValid(location)) {
+        if (!this.locationIsValid(location)) {
             return false;
         }
 
-        Car oldCar = getCarAt(location);
+        Car oldCar = this.getCarAt(location);
 
         if (oldCar == null) {
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+            this.cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
             car.setLocation(location);
-            --numberOfOpenSpots;
+            --this.numberOfOpenSpots;
 
             return true;
         }
@@ -128,19 +128,19 @@ public class SimulatorView extends JFrame {
      * @return the removed car
      */
     public Car removeCarAt(Location location) {
-        if (!locationIsValid(location)) {
+        if (!this.locationIsValid(location)) {
             return null;
         }
 
-        Car car = getCarAt(location);
+        Car car = this.getCarAt(location);
 
         if (car == null) {
             return null;
         }
 
-        cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+        this.cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
-        numberOfOpenSpots++;
+        this.numberOfOpenSpots++;
 
         return car;
     }
@@ -151,12 +151,12 @@ public class SimulatorView extends JFrame {
      * @return the first available location
      */
     public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); ++floor) {
-            for (int row = 0; row < getNumberOfRows(); ++row) {
-                for (int place = 0; place < getNumberOfPlaces(); ++place) {
+        for (int floor = 0; floor < this.getNumberOfFloors(); ++floor) {
+            for (int row = 0; row < this.getNumberOfRows(); ++row) {
+                for (int place = 0; place < this.getNumberOfPlaces(); ++place) {
                     Location location = new Location(floor, row, place);
 
-                    if (getCarAt(location) == null) {
+                    if (this.getCarAt(location) == null) {
                         return location;
                     }
                 }
@@ -172,12 +172,12 @@ public class SimulatorView extends JFrame {
      * @return the first leaving car
      */
     public Car getFirstLeavingCar() {
-        for (int floor = 0; floor < getNumberOfFloors(); ++floor) {
-            for (int row = 0; row < getNumberOfRows(); ++row) {
-                for (int place = 0; place < getNumberOfPlaces(); ++place) {
+        for (int floor = 0; floor < this.getNumberOfFloors(); ++floor) {
+            for (int row = 0; row < this.getNumberOfRows(); ++row) {
+                for (int place = 0; place < this.getNumberOfPlaces(); ++place) {
                     Location location = new Location(floor, row, place);
 
-                    Car car = getCarAt(location);
+                    Car car = this.getCarAt(location);
 
                     if (car != null && car.getMinutesLeft() <= 0 && !car.getIsPaying()) {
                         return car;
@@ -194,11 +194,11 @@ public class SimulatorView extends JFrame {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void tick() {
-        for (int floor = 0; floor < getNumberOfFloors(); ++floor) {
-            for (int row = 0; row < getNumberOfRows(); ++row) {
-                for (int place = 0; place < getNumberOfPlaces(); ++place) {
+        for (int floor = 0; floor < this.getNumberOfFloors(); ++floor) {
+            for (int row = 0; row < this.getNumberOfRows(); ++row) {
+                for (int place = 0; place < this.getNumberOfPlaces(); ++place) {
                     Location location = new Location(floor, row, place);
-                    Car car = getCarAt(location);
+                    Car car = this.getCarAt(location);
 
                     if (car != null) {
                         car.tick();
@@ -219,7 +219,7 @@ public class SimulatorView extends JFrame {
         int row = location.getRow();
         int place = location.getPlace();
 
-        if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
+        if (floor < 0 || floor >= this.numberOfFloors || row < 0 || row > this.numberOfRows || place < 0 || place > this.numberOfPlaces) {
             return false;
         }
 
@@ -239,7 +239,7 @@ public class SimulatorView extends JFrame {
          * @author Hanzehogeschool of Applied Sciences
          */
         public CarParkView() {
-            size = new Dimension(0, 0);
+            this.size = new Dimension(0, 0);
         }
     
         /**
@@ -256,17 +256,17 @@ public class SimulatorView extends JFrame {
          * @author Hanzehogeschool of Applied Sciences
          */
         public void paintComponent(Graphics g) {
-            if (carParkImage == null) {
+            if (this.carParkImage == null) {
                 return;
             }
     
-            Dimension currentSize = getSize();
+            Dimension currentSize = this.getSize();
 
-            if (size.equals(currentSize)) {
-                g.drawImage(carParkImage, 0, 0, null);
+            if (this.size.equals(currentSize)) {
+                g.drawImage(this.carParkImage, 0, 0, null);
             } else {
                 // Rescale the previous image.
-                g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
+                g.drawImage(this.carParkImage, 0, 0, currentSize.width, currentSize.height, null);
             }
         }
 
@@ -276,12 +276,12 @@ public class SimulatorView extends JFrame {
          */
         public void updateView() {
             // Create a new car park image if the size has changed.
-            if (!size.equals(getSize())) {
-                size = getSize();
-                carParkImage = createImage(size.width, size.height);
+            if (!this.size.equals(getSize())) {
+                this.size = getSize();
+                this.carParkImage = createImage(this.size.width, this.size.height);
             }
 
-            Graphics graphics = carParkImage.getGraphics();
+            Graphics graphics = this.carParkImage.getGraphics();
 
             for (int floor = 0; floor < getNumberOfFloors(); ++floor) {
                 for (int row = 0; row < getNumberOfRows(); ++row) {
@@ -290,7 +290,7 @@ public class SimulatorView extends JFrame {
                         Car car = getCarAt(location);
                         Color color = car == null ? Color.white : car.getColor();
 
-                        drawPlace(graphics, location, color);
+                        this.drawPlace(graphics, location, color);
                     }
                 }
             }
