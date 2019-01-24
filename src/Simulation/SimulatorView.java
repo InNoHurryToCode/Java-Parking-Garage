@@ -78,7 +78,7 @@ public class SimulatorView extends JFrame {
      * @author Hanzehogeschool of Applied Sciences
      * @return the amount of open spots
      */
-    public int getNumberOfOpenSpots(){
+    public int getNumberOfOpenSpots() {
         return this.numberOfOpenSpots;
     }
 
@@ -141,7 +141,6 @@ public class SimulatorView extends JFrame {
         this.cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         this.numberOfOpenSpots++;
-
         return car;
     }
 
