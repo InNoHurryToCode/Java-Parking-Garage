@@ -19,6 +19,8 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    private Daytime startDayTime;
+    private Daytime endDayTime;
     private DaytimeManager daytimeManager;
     private int tickPause = 100;
 
@@ -40,6 +42,9 @@ public class Simulator {
         this.paymentCarQueue = new CarQueue();
         this.exitCarQueue = new CarQueue();
         this.simulatorView = new SimulatorView(3, 6, 30);
+        this.startDayTime = new Daytime();
+        this.endDayTime = new Daytime();
+        this.endDayTime.hours = 1;
         this.daytimeManager = new DaytimeManager();
     }
 
@@ -48,7 +53,11 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void run() {
-        for (int i = 0; i < 10000; ++i) {
+        while (true) {
+            if (daytimeManager.getDaytime().equals(endDayTime)) {
+                break;
+            }
+
             this.tick();
         }
     }

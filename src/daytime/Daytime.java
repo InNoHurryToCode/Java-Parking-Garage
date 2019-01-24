@@ -46,4 +46,20 @@ public class Daytime {
         this.months = months;
         this.years = years;
     }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Daytime) {
+            Daytime other = (Daytime)obj;
+
+            if (this.seconds == other.seconds && this.minutes == other.minutes && this.hours == other.hours
+                && this.days == other.days && this.weekday == other.weekday && this.weeks == other.weeks
+                && this.months == other.months && this.years == other.years) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
