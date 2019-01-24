@@ -1,6 +1,7 @@
 package Simulation;
 
 /**
+ * Location contains the car spot properties
  * @author Hanzehogeschool of Applied Sciences
  */
 public class Location {
