@@ -1,4 +1,4 @@
-package Simulation;
+package simulation;
 
 /**
  * The main application class
