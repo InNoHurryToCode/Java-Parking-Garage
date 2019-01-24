@@ -16,7 +16,7 @@ public class CarQueue {
      * @return whenever the car is added to the queue
      */
     public boolean addCar(Car car) {
-        return queue.add(car);
+        return this.queue.add(car);
     }
 
     /**
@@ -25,7 +25,7 @@ public class CarQueue {
      * @return the first car in the queue
      */
     public Car removeCar() {
-        return queue.poll();
+        return this.queue.poll();
     }
 
     /**
@@ -34,6 +34,6 @@ public class CarQueue {
      * @return the cars in the queue
      */
     public int carsInQueue() {
-        return queue.size();
+        return this.queue.size();
     }
 }
