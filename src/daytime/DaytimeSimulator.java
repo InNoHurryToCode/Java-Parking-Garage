@@ -1,12 +1,25 @@
 package daytime;
 
+/**
+ * DaytimeSimulator contains logic to simulate date and time
+ * @author Merijn Hendriks
+ */
 public class DaytimeSimulator {
     private Daytime daytime;
 
+    /**
+     * The DaytimeSimulator constructor
+     * @author Merijn Hendriks
+     * @param daytime
+     */
     public DaytimeSimulator(Daytime daytime) {
         this.daytime = daytime;
     }
 
+    /**
+     * Update the simulation
+     * @author Merijn Hendriks
+     */
     public void tick() {
         this.updateSeconds();
         this.updateMinutes();
@@ -20,10 +33,18 @@ public class DaytimeSimulator {
         DaytimeUtility.printDaytime(this.daytime);
     }
 
+    /**
+     * Updates the second
+     * @author Merijn Hendriks
+     */
     public void updateSeconds() {
         ++this.daytime.seconds;
     }
 
+    /**
+     * Updates the minute
+     * @author Merijn Hendriks
+     */
     public void updateMinutes() {
         if (this.daytime.seconds >= 60) {
             ++this.daytime.minutes;
@@ -31,6 +52,10 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Updates the hour
+     * @author Merijn Hendriks
+     */
     public void updateHours() {
         if (this.daytime.minutes >= 60) {
             ++this.daytime.hours;
@@ -38,6 +63,10 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Updates the day
+     * @author Merijn Hendriks
+     */
     public void updateDays() {
         if (this.daytime.hours >= 24) {
             ++this.daytime.days;
@@ -46,6 +75,10 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Updates the week
+     * @author Merijn Hendriks
+     */
     public void updateWeeks() {
         if (this.daytime.weekday >= 7) {
             ++this.daytime.weeks;
@@ -53,6 +86,10 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Updates the month
+     * @author Merijn Hendriks
+     */
     public void updateMonths() {
         if (this.daytime.days > DaytimeUtility.getDaysInMonth(this.daytime)) {
             ++this.daytime.months;
@@ -60,6 +97,10 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Updates the year
+     * @author Merijn Hendriks
+     */
     public void updateYears() {
         if (this.daytime.months > 12) {
             ++this.daytime.years;
@@ -68,6 +109,11 @@ public class DaytimeSimulator {
         }
     }
 
+    /**
+     * Get the daytime
+     * @author Merijn Hendriks
+     * @return the daytime
+     */
     public Daytime getDaytime() {
         return this.daytime;
     }
