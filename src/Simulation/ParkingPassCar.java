@@ -27,7 +27,7 @@ public class ParkingPassCar extends Car {
      * @author Hanzehogeschool of Applied Sciences
      * @return the color
      */
-    public Color getColor(){
+    public Color getColor() {
         return COLOR;
     }
 }
