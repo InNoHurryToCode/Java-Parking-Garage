@@ -32,11 +32,11 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     public Simulator() {
-        entranceCarQueue = new CarQueue();
-        entrancePassQueue = new CarQueue();
-        paymentCarQueue = new CarQueue();
-        exitCarQueue = new CarQueue();
-        simulatorView = new SimulatorView(3, 6, 30);
+        this.entranceCarQueue = new CarQueue();
+        this.entrancePassQueue = new CarQueue();
+        this.paymentCarQueue = new CarQueue();
+        this.exitCarQueue = new CarQueue();
+        this.simulatorView = new SimulatorView(3, 6, 30);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Simulator {
      */
     public void run() {
         for (int i = 0; i < 10000; ++i) {
-            tick();
+            this.tick();
         }
     }
 
@@ -54,18 +54,18 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void tick() {
-    	advanceTime();
-    	handleExit();
-    	updateViews();
+        this.advanceTime();
+        this.handleExit();
+        this.updateViews();
 
     	// Pause.
         try {
-            Thread.sleep(tickPause);
+            Thread.sleep(this.tickPause);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-    	handleEntrance();
+        this.handleEntrance();
     }
 
     /**
@@ -74,20 +74,20 @@ public class Simulator {
      */
     private void advanceTime() {
         // Advance the time by one minute.
-        ++minute;
+        ++this.minute;
 
-        while (minute > 59) {
-            minute -= 60;
-            ++hour;
+        while (this.minute > 59) {
+            this.minute -= 60;
+            ++this.hour;
         }
 
-        while (hour > 23) {
-            hour -= 24;
-            ++day;
+        while (this.hour > 23) {
+            this.hour -= 24;
+            ++this.day;
         }
 
-        while (day > 6) {
-            day -= 7;
+        while (this.day > 6) {
+            this.day -= 7;
         }
     }
 
@@ -96,19 +96,19 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void handleEntrance() {
-    	carsArriving();
-    	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
+        this.carsArriving();
+        this.carsEntering(this.entrancePassQueue);
+        this.carsEntering(this.entranceCarQueue);
     }
 
     /**
      * Update exit queues
      * @author Hanzehogeschool of Applied Sciences
      */
-    private void handleExit(){
-        carsReadyToLeave();
-        carsPaying();
-        carsLeaving();
+    private void handleExit() {
+        this.carsReadyToLeave();
+        this.carsPaying();
+        this.carsLeaving();
     }
 
     /**
@@ -116,10 +116,10 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void updateViews() {
-    	simulatorView.tick();
+        this.simulatorView.tick();
 
         // Update the car park view.
-        simulatorView.updateView();	
+        this.simulatorView.updateView();
     }
 
     /**
@@ -127,13 +127,13 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void carsArriving() {
-    	int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
+    	int numberOfCars = this.getNumberOfCars(this.weekDayArrivals, this.weekendArrivals);
 
-        addArrivingCars(numberOfCars, AD_HOC);
+        this.addArrivingCars(numberOfCars, AD_HOC);
 
-    	numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+    	numberOfCars = this.getNumberOfCars(this.weekDayPassArrivals, this.weekendPassArrivals);
 
-    	addArrivingCars(numberOfCars, PASS);
+        this.addArrivingCars(numberOfCars, PASS);
     }
 
     /**
@@ -145,11 +145,11 @@ public class Simulator {
         int i = 0;
 
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 &&	i < enterSpeed) {
+    	while (queue.carsInQueue() > 0 && this.simulatorView.getNumberOfOpenSpots() > 0 && i < this.enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = simulatorView.getFirstFreeLocation();
+            Location freeLocation = this.simulatorView.getFirstFreeLocation();
 
-            simulatorView.setCarAt(freeLocation, car);
+            this.simulatorView.setCarAt(freeLocation, car);
             ++i;
         }
     }
@@ -160,17 +160,17 @@ public class Simulator {
      */
     private void carsReadyToLeave() {
         // Add leaving cars to the payment queue.
-        Car car = simulatorView.getFirstLeavingCar();
+        Car car = this.simulatorView.getFirstLeavingCar();
 
         while (car != null) {
         	if (car.getHasToPay()) {
 	            car.setIsPaying(true);
-	            paymentCarQueue.addCar(car);
+                this.paymentCarQueue.addCar(car);
         	} else {
-        		carLeavesSpot(car);
+                this.carLeavesSpot(car);
         	}
 
-            car = simulatorView.getFirstLeavingCar();
+            car = this.simulatorView.getFirstLeavingCar();
         }
     }
 
@@ -182,11 +182,11 @@ public class Simulator {
         // Let cars pay.
     	int i = 0;
 
-    	while (paymentCarQueue.carsInQueue() > 0 && i < paymentSpeed) {
-            Car car = paymentCarQueue.removeCar();
+    	while (this.paymentCarQueue.carsInQueue() > 0 && i < this.paymentSpeed) {
+            Car car = this.paymentCarQueue.removeCar();
 
             // TODO Handle payment.
-            carLeavesSpot(car);
+            this.carLeavesSpot(car);
 
             ++i;
     	}
@@ -200,8 +200,8 @@ public class Simulator {
         // Let cars leave.
     	int i = 0;
 
-    	while (exitCarQueue.carsInQueue() > 0 && i < exitSpeed) {
-            exitCarQueue.removeCar();
+    	while (this.exitCarQueue.carsInQueue() > 0 && i < this.exitSpeed) {
+            this.exitCarQueue.removeCar();
             ++i;
     	}	
     }
@@ -237,13 +237,13 @@ public class Simulator {
     	switch(type) {
     	case AD_HOC: 
             for (int i = 0; i < numberOfCars; ++i) {
-            	entranceCarQueue.addCar(new AdHocCar());
+                this.entranceCarQueue.addCar(new AdHocCar());
             }
             break;
 
     	case PASS:
             for (int i = 0; i < numberOfCars; ++i) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
+                this.entrancePassQueue.addCar(new ParkingPassCar());
             }
             break;	            
     	}
@@ -255,7 +255,7 @@ public class Simulator {
      * @param car the car to leave it's spot
      */
     private void carLeavesSpot(Car car) {
-    	simulatorView.removeCarAt(car.getLocation());
-        exitCarQueue.addCar(car);
+        this.simulatorView.removeCarAt(car.getLocation());
+        this.exitCarQueue.addCar(car);
     }
 }
