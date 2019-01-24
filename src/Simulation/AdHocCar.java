@@ -8,7 +8,7 @@ import java.awt.*;
  * @author Hanzehogeschool of Applied Sciences
  */
 public class AdHocCar extends Car {
-	private static final Color COLOR=Color.red;
+	private static final Color COLOR = Color.red;
 
     /**
      * The AdHocCar constructor
