@@ -5,7 +5,6 @@ package Simulation;
  * @author Hanzehogeschool of Applied Sciences
  */
 public class Location {
-
     private int floor;
     private int row;
     private int place;
@@ -25,11 +24,15 @@ public class Location {
      * @author Hanzehogeschool of Applied Sciences
      */
     public boolean equals(Object obj) {
-        if(obj instanceof Location) {
-            Location other = (Location) obj;
-            return floor == other.getFloor() && row == other.getRow() && place == other.getPlace();
-        }
-        else {
+        if (obj instanceof Location) {
+            Location other = (Location)obj;
+
+            if (floor == other.getFloor() && row == other.getRow() && place == other.getPlace()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
@@ -80,5 +83,4 @@ public class Location {
     public int getPlace() {
         return place;
     }
-
 }

@@ -33,7 +33,7 @@ public class CarQueue {
      * @author Hanzehogeschool of Applied Sciences
      * @return the cars in the queue
      */
-    public int carsInQueue(){
-    	return queue.size();
+    public int carsInQueue() {
+        return queue.size();
     }
 }

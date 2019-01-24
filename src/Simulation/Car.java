@@ -3,10 +3,10 @@ package Simulation;
 import java.awt.*;
 
 /**
+ * Car contains a generic implementation
  * @author Hanzehogeschool of Applied Sciences
  */
 public abstract class Car {
-
     private Location location;
     private int minutesLeft;
     private boolean isPaying;
@@ -97,7 +97,7 @@ public abstract class Car {
      * @author Hanzehogeschool of Applied Sciences
      */
     public void tick() {
-        minutesLeft--;
+        --minutesLeft;
     }
 
     /**
