@@ -1,6 +1,17 @@
 package daytime;
 
+/**
+ * DaytimeUtility contains useful functions which shouldn't be part
+ * of Daytime, but are relevant to daytime calculations
+ * @author Merijn Hendriks
+ */
 public class DaytimeUtility {
+    /**
+     * Get the time period of the day
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the time period of the day
+     */
     public static TimePeriod getTimePeriod(Daytime daytime) {
         if (daytime.hours == 0 && daytime.minutes == 0 && daytime.seconds == 0) {
             return TimePeriod.MIDNIGHT;
@@ -19,6 +30,12 @@ public class DaytimeUtility {
         return null;
     }
 
+    /**
+     * Get the day of the week
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the day of the week
+     */
     public static Weekday getWeekday(Daytime daytime) {
         switch (daytime.weekday) {
             case 0:
@@ -46,6 +63,12 @@ public class DaytimeUtility {
         return null;
     }
 
+    /**
+     * Get the month
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the month
+     */
     public static Month getMonth(Daytime daytime) {
         switch (daytime.months) {
             case 1:
@@ -88,6 +111,12 @@ public class DaytimeUtility {
         return null;
     }
 
+    /**
+     * Get the season of the year
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the season of the year
+     */
     public static Season getSeason(Daytime daytime) {
         if (daytime.months >= 3 && daytime.months < 6) {
             return Season.SPRING;
@@ -102,6 +131,12 @@ public class DaytimeUtility {
         return null;
     }
 
+    /**
+     * Get the amount of days in the current month
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the anount of days in the current month
+     */
     public static int getDaysInMonth(Daytime daytime) {
         switch (daytime.months) {
             case 1:
@@ -131,6 +166,12 @@ public class DaytimeUtility {
         return 0;
     }
 
+    /**
+     * Get the amount of days in the current year
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the amount of days in the current year
+     */
     public static int getDaysInYear(Daytime daytime) {
         int days = 0;
 
@@ -141,6 +182,12 @@ public class DaytimeUtility {
         return days;
     }
 
+    /**
+     * Get the amount of months passed since year 0001
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the amount of months passed since year 0001
+     */
     public static int getMonthCountSince0001(Daytime daytime) {
         int months = 0;
 
@@ -153,6 +200,11 @@ public class DaytimeUtility {
         return months;
     }
 
+    /**
+     * Get the amount of days passed since year 0001
+     * @param daytime the daytime
+     * @return the amount of days passed since year 0001
+     */
     public static int getDaysCountSince0001(Daytime daytime) {
         int days = 0;
 
@@ -169,14 +221,32 @@ public class DaytimeUtility {
         return days;
     }
 
+    /**
+     * Get the amount of weeks passed since year 0001
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the amount of weeks passed since year 0001
+     */
     public static int getWeeksCountSince0001(Daytime daytime) {
         return getDaysCountSince0001(daytime) / 7;
     }
 
-    public static int getWeekdaySince0001(Daytime daytime) {
+    /**
+     * Get the curent weekday based on amount of days passed since year 0001
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the current weekday
+     */
+    public static int getCurentWeekday(Daytime daytime) {
         return getDaysCountSince0001(daytime) % 7;
     }
 
+    /**
+     * Format the text to appear properly with 2 digits
+     * @author Merijn Hendriks
+     * @param value the value to format
+     * @return the formatted string
+     */
     public static String formatTwoDigit(int value) {
         if (value < 10) {
             return "0" + value;
@@ -185,6 +255,12 @@ public class DaytimeUtility {
         }
     }
 
+    /**
+     * Format the text to appear properly with 4 digits
+     * @author Merijn Hendriks
+     * @param value the value to format
+     * @return the formatted string
+     */
     public static String formatFourDigit(int value) {
         if (value < 10) {
             return "000" + value;
@@ -197,14 +273,31 @@ public class DaytimeUtility {
         }
     }
 
+    /**
+     * Get the time as properly formatted String
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the formatted string
+     */
     public static String getTimeString(Daytime daytime) {
         return formatTwoDigit(daytime.hours) + "-" + formatTwoDigit(daytime.minutes) + "-" + formatTwoDigit(daytime.seconds);
     }
 
+    /**
+     * Get the date as properly formatted String
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     * @return the formatted string
+     */
     public static String getDateString(Daytime daytime) {
         return formatTwoDigit(daytime.days) + "/" + formatTwoDigit(daytime.months) + "/" + formatTwoDigit(daytime.years);
     }
 
+    /**
+     * Show all daytime properties in the console
+     * @author Merijn Hendriks
+     * @param daytime the daytime
+     */
     public static void printDaytime(Daytime daytime) {
         System.out.println("------------------------------------------------------");
         System.out.println("Daytime time: " + getTimeString(daytime));
