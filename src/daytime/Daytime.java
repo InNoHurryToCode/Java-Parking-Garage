@@ -1,14 +1,14 @@
 package daytime;
 
 public class Daytime {
-    private int seconds;
-    private int minutes;
-    private int hours;
-    private int days;
-    private int weekday;
-    private int weeks;
-    private int months;
-    private int years;
+    public int seconds;
+    public int minutes;
+    public int hours;
+    public int days;
+    public int weekday;
+    public int weeks;
+    public int months;
+    public int years;
 
     public Daytime() {
         this.seconds = 0;
