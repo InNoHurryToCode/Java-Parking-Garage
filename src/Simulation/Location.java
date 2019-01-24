@@ -1,4 +1,4 @@
-package Simulation;
+package simulation;
 
 /**
  * Location contains the car spot properties
