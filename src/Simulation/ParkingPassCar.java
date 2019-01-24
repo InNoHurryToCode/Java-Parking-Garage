@@ -8,7 +8,7 @@ import java.awt.*;
  * @author Hanzehogeschool of Applied Sciences
  */
 public class ParkingPassCar extends Car {
-	private static final Color COLOR=Color.blue;
+	private static final Color COLOR = Color.blue;
 
     /**
      * The ParkingPassCar constructor
@@ -16,7 +16,8 @@ public class ParkingPassCar extends Car {
      */
     public ParkingPassCar() {
     	Random random = new Random();
-    	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
+    	int stayMinutes = (int)(15 + random.nextFloat() * 3 * 60);
+
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }
@@ -27,6 +28,6 @@ public class ParkingPassCar extends Car {
      * @return the color
      */
     public Color getColor(){
-    	return COLOR;
+        return COLOR;
     }
 }
