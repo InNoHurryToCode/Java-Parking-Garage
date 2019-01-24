@@ -1,5 +1,9 @@
 package daytime;
 
+/**
+ * Daytime contains date time values
+ * @author Merijn Hendriks
+ */
 public class Daytime {
     public int seconds;
     public int minutes;
@@ -10,6 +14,10 @@ public class Daytime {
     public int months;
     public int years;
 
+    /**
+     * The daytime constructor
+     * @author Merijn Hendriks
+     */
     public Daytime() {
         this.seconds = 0;
         this.minutes = 0;
