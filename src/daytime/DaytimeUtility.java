@@ -204,4 +204,14 @@ public class DaytimeUtility {
     public static String getDateString(Daytime daytime) {
         return formatTwoDigit(daytime.days) + "/" + formatTwoDigit(daytime.months) + "/" + formatTwoDigit(daytime.years);
     }
+
+    public static void printDaytime(Daytime daytime) {
+        System.out.println("------------------------------------------------------");
+        System.out.println("Daytime time: " + getTimeString(daytime));
+        System.out.println("Daytime date: " + getDateString(daytime));
+        System.out.println("Daytime time period: " + getTimePeriod(daytime).toString());
+        System.out.println("Daytime weekday: " + getWeekday(daytime).toString());
+        System.out.println("Daytime month: " + getMonth(daytime).toString());
+        System.out.println("Daytime season: " + getSeason(daytime).toString());
+    }
 }

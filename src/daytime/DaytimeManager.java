@@ -15,6 +15,9 @@ public class DaytimeManager {
         this.updateWeeks();
         this.updateMonths();
         this.updateYears();
+
+        // debug
+        DaytimeUtility.printDaytime(this.daytime);
     }
 
     public void updateSeconds() {
@@ -63,5 +66,9 @@ public class DaytimeManager {
             this.daytime.weeks = 1;
             this.daytime.months = 1;
         }
+    }
+
+    public Daytime getDaytime() {
+        return this.daytime;
     }
 }

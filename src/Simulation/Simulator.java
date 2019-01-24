@@ -1,5 +1,10 @@
 package simulation;
 
+import daytime.Daytime;
+import daytime.DaytimeManager;
+import daytime.DaytimeUtility;
+import daytime.Weekday;
+
 import java.util.Random;
 
 /**
@@ -14,9 +19,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
-    private int day = 0;
-    private int hour = 0;
-    private int minute = 0;
+    private DaytimeManager daytimeManager;
     private int tickPause = 100;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
@@ -37,6 +40,7 @@ public class Simulator {
         this.paymentCarQueue = new CarQueue();
         this.exitCarQueue = new CarQueue();
         this.simulatorView = new SimulatorView(3, 6, 30);
+        this.daytimeManager = new DaytimeManager();
     }
 
     /**
@@ -54,7 +58,7 @@ public class Simulator {
      * @author Hanzehogeschool of Applied Sciences
      */
     private void tick() {
-        this.advanceTime();
+        this.daytimeManager.tick();
         this.handleExit();
         this.updateViews();
 
@@ -66,29 +70,6 @@ public class Simulator {
         }
 
         this.handleEntrance();
-    }
-
-    /**
-     * Update the simulated time
-     * @author Hanzehogeschool of Applied Sciences
-     */
-    private void advanceTime() {
-        // Advance the time by one minute.
-        ++this.minute;
-
-        while (this.minute > 59) {
-            this.minute -= 60;
-            ++this.hour;
-        }
-
-        while (this.hour > 23) {
-            this.hour -= 24;
-            ++this.day;
-        }
-
-        while (this.day > 6) {
-            this.day -= 7;
-        }
     }
 
     /**
@@ -216,7 +197,15 @@ public class Simulator {
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5 ? weekDay : weekend;
+        Daytime daytime = this.daytimeManager.getDaytime();
+
+        int averageNumberOfCarsPerHour = 0;
+
+        if ((DaytimeUtility.getWeekday(daytime) == Weekday.SATURDAY) || (DaytimeUtility.getWeekday(daytime) == Weekday.SUNDAY)) {
+            averageNumberOfCarsPerHour = weekend;
+        } else {
+            averageNumberOfCarsPerHour = weekDay;
+        }
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
