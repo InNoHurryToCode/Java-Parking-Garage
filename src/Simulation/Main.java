@@ -1,5 +1,7 @@
 package simulation;
 
+import simulation.services.Simulator;
+
 /**
  * The main application class
  * @author Merijn Hendriks

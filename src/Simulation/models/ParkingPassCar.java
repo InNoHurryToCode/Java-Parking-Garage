@@ -1,4 +1,6 @@
-package simulation;
+package simulation.models;
+
+import simulation.models.Car;
 
 import java.util.Random;
 import java.awt.*;

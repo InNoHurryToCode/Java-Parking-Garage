@@ -1,7 +1,8 @@
-package simulation;
+package simulation.services;
 
 import daytime.Daytime;
 import daytime.DaytimeSimulator;
+import simulation.views.SimulatorView;
 
 /**
  * Simulator contains most of the simulation logic

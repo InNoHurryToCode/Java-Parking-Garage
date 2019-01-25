@@ -1,4 +1,4 @@
-package simulation;
+package simulation.models;
 
 import java.awt.*;
 
