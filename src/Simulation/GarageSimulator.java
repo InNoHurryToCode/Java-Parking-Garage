@@ -44,6 +44,7 @@ public class GarageSimulator {
     public void tick() {
         this.handleExit();
         this.handleEntrance();
+        this.handleCars();
     }
 
     /**
@@ -290,7 +291,7 @@ public class GarageSimulator {
      * Update the simulation
      * @author Hanzehogeschool of Applied Sciences
      */
-    public void carTick() {
+    public void handleCars() {
         for (int floor = 0; floor < this.getNumberOfFloors(); ++floor) {
             for (int row = 0; row < this.getNumberOfRows(); ++row) {
                 for (int place = 0; place < this.getNumberOfPlaces(); ++place) {
