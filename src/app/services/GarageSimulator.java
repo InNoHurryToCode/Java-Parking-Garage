@@ -1,6 +1,6 @@
-package simulation.services;
+package app.services;
 
-import simulation.models.*;
+import app.models.*;
 
 /**
  * GarageSimulation contains logic to simulate the garage

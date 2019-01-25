@@ -1,8 +1,8 @@
-package simulation.views;
+package app.views;
 
-import simulation.models.Car;
-import simulation.models.Location;
-import simulation.services.GarageSimulator;
+import app.models.Car;
+import app.models.Location;
+import app.services.GarageSimulator;
 
 import javax.swing.*;
 import java.awt.*;
