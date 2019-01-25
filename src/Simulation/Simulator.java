@@ -16,6 +16,7 @@ public class Simulator {
 	private static final String PASS = "2";
     private Daytime startDayTime;
     private Daytime endDayTime;
+    private SimulatorView simulatorView;
     private DaytimeSimulator daytimeSimulator;
     private GarageSimulator garageSimulator;
     private int tickPause = 100;
@@ -33,8 +34,9 @@ public class Simulator {
         this.startDayTime = new Daytime();
         this.endDayTime = new Daytime();
         this.endDayTime.hours = 1;
+        this.simulatorView = new SimulatorView(3, 6, 30);
         this.daytimeSimulator = new DaytimeSimulator(this.startDayTime);
-        this.garageSimulator = new GarageSimulator();
+        this.garageSimulator = new GarageSimulator(simulatorView);
     }
 
     /**
@@ -57,10 +59,9 @@ public class Simulator {
      */
     private void tick() {
         this.daytimeSimulator.tick();
-
         this.carsArriving();
-
         this.garageSimulator.tick();
+        this.updateViews();
 
     	// Pause.
         try {
@@ -68,6 +69,17 @@ public class Simulator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Update SimultorView
+     * @author Hanzehogeschool of Applied Sciences
+     */
+    private void updateViews() {
+        this.simulatorView.tick();
+
+        // Update the car park view.
+        this.simulatorView.updateView();
     }
 
     /**

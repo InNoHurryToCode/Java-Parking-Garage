@@ -18,8 +18,8 @@ public class GarageSimulator {
      * The GarageSimulator contructor
      * @author Merijn Hendriks
      */
-    public GarageSimulator() {
-        this.simulatorView = new SimulatorView(3, 6, 30);
+    public GarageSimulator(SimulatorView simulatorView) {
+        this.simulatorView = simulatorView;
         this.entranceCarQueue = new CarQueue();
         this.entrancePassQueue = new CarQueue();
         this.paymentCarQueue = new CarQueue();
@@ -32,19 +32,7 @@ public class GarageSimulator {
      */
     public void tick() {
         this.handleExit();
-        this.updateViews();
         this.handleEntrance();
-    }
-
-    /**
-     * Update SimultorView
-     * @author Hanzehogeschool of Applied Sciences
-     */
-    private void updateViews() {
-        this.simulatorView.tick();
-
-        // Update the car park view.
-        this.simulatorView.updateView();
     }
 
     /**
