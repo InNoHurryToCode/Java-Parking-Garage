@@ -25,14 +25,14 @@ public class SimulatorView extends JFrame {
         contentPane.add(this.carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
-        this.updateView();
+        this.tick();
     }
 
     /**
      * Update the view
      * @author Hanzehogeschool of Applied Sciences
      */
-    public void updateView() {
+    public void tick() {
         this.carParkView.updateView();
     }
 
