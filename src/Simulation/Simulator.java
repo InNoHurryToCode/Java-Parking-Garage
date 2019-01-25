@@ -52,7 +52,7 @@ public class Simulator {
         this.daytimeSimulator.tick();
         this.carSimulator.tick();
         this.garageSimulator.tick();
-        this.updateViews();
+        this.simulatorView.tick();
 
     	// Pause.
         try {
@@ -60,14 +60,5 @@ public class Simulator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Update SimultorView
-     * @author Hanzehogeschool of Applied Sciences
-     */
-    private void updateViews() {
-        // Update the car park view.
-        this.simulatorView.updateView();
     }
 }
