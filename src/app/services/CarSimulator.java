@@ -1,4 +1,4 @@
-package simulation;
+package app.services;
 
 import daytime.Daytime;
 import daytime.DaytimeSimulator;

@@ -1,4 +1,4 @@
-package simulation;
+package app.models;
 
 /**
  * Location contains the car spot properties

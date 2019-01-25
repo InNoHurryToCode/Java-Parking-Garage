@@ -1,4 +1,6 @@
-package simulation;
+package app;
+
+import app.services.Simulator;
 
 /**
  * The main application class
